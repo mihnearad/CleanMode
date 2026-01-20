@@ -50,6 +50,12 @@ eventMask |= (1 << CGEventType.otherMouseDragged.rawValue)
 eventMask |= (1 << CGEventType.tabletPointer.rawValue)
 eventMask |= (1 << CGEventType.tabletProximity.rawValue)
 
+// Gesture events (trackpad swipes, pinch, rotate, etc.)
+// These are private CGEventType values not exposed in the public API
+eventMask |= (1 << 29) // kCGEventGesture (gestures: swipe, pinch, rotate)
+eventMask |= (1 << 30) // kCGEventDockGesture / scroll gesture
+eventMask |= (1 << 31) // Additional gesture events on some macOS versions
+
 var eventTapRef: CFMachPort?
 
 func callback(proxy: CGEventTapProxy, type: CGEventType, event: CGEvent, refcon: UnsafeMutableRawPointer?) -> Unmanaged<CGEvent>? {
